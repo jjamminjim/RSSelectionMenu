@@ -322,7 +322,13 @@ extension RSSelectionMenu {
             }
             
             navigationItem.title = theme.title
-            navigationBar.titleTextAttributes = theme.attributes
+			
+			if let attributes = theme.attributes {
+				let convertedAttributes = Dictionary(uniqueKeysWithValues:
+					attributes.lazy.map { (NSAttributedStringKey($0.key), $0.value) }
+				)
+				navigationBar.titleTextAttributes = convertedAttributes
+			}
         }
     }
 }
