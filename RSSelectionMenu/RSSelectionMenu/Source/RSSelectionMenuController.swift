@@ -300,7 +300,7 @@ extension RSSelectionMenu {
             
             let popover = tobePresentController.popoverPresentationController!
             popover.delegate = self
-            popover.permittedArrowDirections = .any
+            popover.permittedArrowDirections = .up
             popover.sourceView = sourceView
             popover.sourceRect = sourceView.bounds
         }
