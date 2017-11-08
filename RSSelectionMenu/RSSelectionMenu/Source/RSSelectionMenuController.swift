@@ -296,11 +296,25 @@ extension RSSelectionMenu {
         }
         else if case let .Popover(sourceView, size) = with {
             tobePresentController.modalPresentationStyle = .popover
-            if size != nil { tobePresentController.preferredContentSize = size! }
+            
+            var desiredDirection:UIPopoverArrowDirection = .up
+            if let localSize = size {
+                tobePresentController.preferredContentSize = size!
+                let screenRect = UIScreen.main.bounds
+                
+                let globalPoint = sourceView.superview!.convert(sourceView.frame.origin, to: nil)
+                
+                let downDistance = screenRect.height - ( sourceView.bounds.height + globalPoint.y )
+                let upDistance = globalPoint.y
+                
+                if  localSize.height > downDistance  && downDistance < 115  && upDistance > downDistance {
+                    desiredDirection = .down
+                }
+            }
             
             let popover = tobePresentController.popoverPresentationController!
             popover.delegate = self
-            popover.permittedArrowDirections = .up
+            popover.permittedArrowDirections = desiredDirection
             popover.sourceView = sourceView
             popover.sourceRect = sourceView.bounds
         }
