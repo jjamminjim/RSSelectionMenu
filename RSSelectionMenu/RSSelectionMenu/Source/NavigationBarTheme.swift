@@ -1,7 +1,8 @@
 //
-//  AssociatedObjectExtension.swift
+//  NavigationBarTheme.swift
+//  RSSelectionMenu
 //
-//  Copyright (c) 2017 Rushi Sangani
+//  Copyright (c) 2019 Rushi Sangani
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,18 +24,15 @@
 //
 
 import Foundation
+import UIKit
 
-// convert to dictionary
-public extension NSObject {
+/// NavigationBarTheme
+public struct NavigationBarTheme {
     
-    // dictionary
-    @objc public func toDictionary() -> [String: AnyObject] {
-        
-        let propertiesDictionary : NSMutableDictionary = NSMutableDictionary()
-        let model = Mirror(reflecting: self)
-        for (name, value) in model.children {
-            propertiesDictionary.setValue(value, forKey: name!)
-        }
-        return propertiesDictionary as! [String : AnyObject]
-    }
+    // MARK: - Properties
+    
+    var title: String?
+    var titleAttributes: [NSAttributedString.Key: Any]?
+    var tintColor: UIColor?
+    var barTintColor: UIColor?
 }
